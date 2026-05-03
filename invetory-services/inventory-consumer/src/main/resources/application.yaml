@@ -6,3 +6,9 @@ spring:
     port: 5672
     username: admin
     password: 123456
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 1        # min quantity of threads that go process messages
+        max-concurrency: 1    # max quantity of threads that go process messages
+        prefetch: 1           # quantity of unacknowledge messages that consumer can receive from rabbitmq
