@@ -21,13 +21,14 @@ public class InventoryConsumer {
             System.out.printf("quantity %s \n\n", dto.quantity);
 
             if (dto.quantity <= 0) {
-                System.out.println("ACK");
+                System.out.println("Rejected and did not requeue");
                 channel.basicReject(tag, false);
             } else {
-                System.out.println("NACK");
+                System.out.println("ACK");
                 channel.basicAck(tag, false);
             }
         } catch (Exception e) {
+            System.out.println("Rejected and did requeue");
             channel.basicReject(tag, true);
         }
     }
